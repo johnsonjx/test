@@ -1,0 +1,5 @@
+total 24
+-rw-r--r--  1 johnson  staff  78 Nov 24 09:29 README.md
+-rwxr-xr-x  1 johnson  staff  53 Nov 24 09:13 backup.sh
+-rwxr-xr-x  1 johnson  staff  34 Nov 24 09:07 hello-world.sh
+-rw-r--r--  1 johnson  staff   0 Nov 24 09:30 ls-l.txt

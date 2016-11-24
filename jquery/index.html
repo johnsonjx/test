@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="./node_modules/jquery/jquery.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      var a = {
+        name: 'a',
+        age: 13
+      };
+      $.extend(a, {age: 12});
+      document.write(JSON.stringify(a));
+    </script>
+  </body>
+</html>

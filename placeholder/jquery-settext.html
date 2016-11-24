@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style media="screen">
+      .placeholder {
+        color: rgb(145, 145, 142);
+      }
+      ::-webkit-input-placeholder {
+        color: rgb(145, 145, 142);
+      }
+
+    </style>
+  </head>
+  <body>
+    <input type="text" placeholder="Fill me …">
+    <script src="./node_modules/jquery/jquery.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      (function($) {
+        $.support.placeholder = ('placeholder' in document.createElement('input'));
+      })(jQuery);
+
+      //fix for IE7 and IE8
+      $(function() {
+        if (!$.support.placeholder) {
+          $("[placeholder]").focus(function() {
+            var $me = $(this);
+            if ($me.val() == $me.attr("placeholder"))
+              $me.val("");
+            $me.removeClass('placeholder');
+          }).blur(function() {
+            var $me = $(this);
+            if ($me.val() == "")
+              $me.val($me.attr("placeholder"));
+            $me.addClass('placeholder');
+          }).blur();
+
+          $("[placeholder]").parents("form").submit(function() {
+            var $me = $(this);
+            $me.find('[placeholder]').each(function() {
+              if ($me.val() == $me.attr("placeholder")) {
+                $me.removeClass('placeholder');
+                $me.val("");
+              }
+            });
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

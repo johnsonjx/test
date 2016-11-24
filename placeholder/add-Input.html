@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="node_modules/jquery/jquery.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      var initPlaceholders = function() {
+        var placeHolderMap = {};
+        $("[placeholder]").blur(addPlaceHolder).blur();
+
+        function addPlaceHolder() {
+          var $dom = $(this),
+            id = $dom.attr('id'),
+            placeholderObj = placeHolderMap[id];
+          if ($dom.val() !== '') {
+            return;
+          }
+          if (!placeholderObj) {
+            placeholderObj = initPlaceholder(id, $dom);
+          }
+          $dom.hide();
+          placeholderObj.$holder.val(placeholderObj.holderTip).show();
+        }
+
+        function initPlaceholder(id, $dom) {
+          var holderTip = $dom.attr("placeholder"),
+            $holder = $('<input class="placeholder" >').addClass($dom.attr('class')).attr('domid', id).val(holderTip),
+            placeholderObj = {
+              $dom: $dom,
+              $holder: $holder,
+              holderTip: $dom.attr("placeholder")
+            };
+          placeHolderMap[id] = placeholderObj;
+          $holder.keydown(removePlaceholder);
+          placeholderObj.$holder.insertAfter($dom);
+          return placeholderObj;
+        }
+
+        function removePlaceholder() {
+          var $holder = $(this),
+            id = $holder.attr('domid'),
+            placeholderObj = placeHolderMap[id];
+          $holder.hide();
+          placeholderObj.$dom.show().focus();
+        }
+      };
+    </script>
+  </body>
+</html>
